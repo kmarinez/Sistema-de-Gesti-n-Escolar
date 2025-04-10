@@ -5,6 +5,9 @@ class EstudianteController:
         self.estudiantes = []
 
     def agregar_estudiante(self, nombre, edad, curso):
+        for est in self.estudiantes:
+            if est.nombre == nombre:
+                return f"Error: El estudiante {nombre} ya está registrado."
         estudiante = Estudiante(nombre, edad, curso)
         self.estudiantes.append(estudiante)
         return f"Estudiante {nombre} agregado al curso {curso}."

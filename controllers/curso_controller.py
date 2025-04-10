@@ -1,18 +1,13 @@
 from models.curso import Curso
 
 class CursoController:
-    _instance = None  # Singleton
+    def __init__(self):
+        self.cursos = []
 
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(CursoController, cls).__new__(cls)
-            cls._instance.cursos = []  # Lista en memoria para gestionar cursos
-        return cls._instance
-
-    def agregar_curso(self, nombre, codigo, profesor):
-        curso = Curso(nombre, codigo, profesor)
+    def agregar_curso(self, nombre, codigo, profesor, limite=2):
+        curso = Curso(nombre, codigo, profesor, limite)
         self.cursos.append(curso)
-        return f"Curso {nombre} agregado con código {codigo}."
+        return f"Curso {nombre} agregado con código {codigo} y límite {limite} estudiantes."
 
     def listar_cursos(self):
         if not self.cursos:
